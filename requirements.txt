@@ -1,0 +1,6 @@
+dotenv
+langchain
+transformers
+langchain-chroma
+langchain-huggingface
+groq
