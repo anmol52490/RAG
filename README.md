@@ -98,5 +98,5 @@ Follow these steps to set up the project on your local machine.
 ## Acknowledgements
 
 Thanks to HuggingFace for providing powerful models and to Groq for their API. Special thanks to LangChain for their extensive libraries and tools.
-```
+
 
