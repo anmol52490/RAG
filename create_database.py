@@ -6,7 +6,6 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 from transformers import AutoModel, AutoTokenizer
 from langchain_chroma import Chroma
-import torch
 from langchain_huggingface import HuggingFaceEmbeddings
 
 # Load environment variables from a .env file
@@ -62,17 +61,6 @@ def save_to_chroma(chunks: list[Document]):
             print(f"Cleared existing Chroma database at {CHROMA_PATH}.")
 
         hf_embeddings = HuggingFaceEmbeddings(model_name="distilbert-base-uncased")
-
-        chunk_counter = 0
-        for chunk in chunks:
-            embeddings = hf_embeddings.embed_documents([chunk.page_content])
-            embedding = embeddings[0]
-
-            if chunk_counter < 5:
-                print(f"Embedding for chunk {chunk_counter + 1} '{chunk.page_content[:100]}...':")
-                print(f"Generated embedding shape: {embedding.shape if hasattr(embedding, 'shape') else len(embedding)}")
-                print(embedding)
-                chunk_counter += 1
 
         db = Chroma.from_documents(chunks, hf_embeddings, persist_directory=CHROMA_PATH)
         print(f"Saved {len(chunks)} chunks to {CHROMA_PATH}.")
