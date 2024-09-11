@@ -14,11 +14,11 @@ load_dotenv(find_dotenv())
 # Define paths for Chroma database and data files
 CHROMA_PATH = os.path.join(os.path.dirname(__file__), "chroma")
 DATA_PATH = os.path.join(os.path.dirname(__file__), "data")
-
+cache_dir = os.getenv("CACHE_DIR", "./default_cache_path")
 # Load pre-trained model and tokenizer
 model_id = "distilbert-base-uncased"
-model = AutoModel.from_pretrained(model_id, cache_dir="C:/Users/muska/Desktop/RAG_project/RAG")
-tokenizer = AutoTokenizer.from_pretrained(model_id, clean_up_tokenization_spaces=False, cache_dir="C:/Users/muska/Desktop/RAG_project/RAG")
+model = AutoModel.from_pretrained(model_id, cache_dir=cache_dir)
+tokenizer = AutoTokenizer.from_pretrained(model_id, clean_up_tokenization_spaces=False, cache_dir=cache_dir)
 
 def main():
     try:
